@@ -1,0 +1,39 @@
+On local ATLAS cluster:
+
+To run all the way through the madanalysis hadron level: 
+
+1  Download tar ball:
+      https://launchpad.net/mg5amcnlo
+2  Untar the tar ball
+3  source /users/jlove/Analysis/Zbb/TruthStudy/setup_gcc47.sh
+4  Change the paths to lhapdf6 and fastjet in  input/mg5_configuration.txt
+      lhapdf6:  /share/sl6/lhapdf6/bin/lhapdf-config
+      fastjet:/share/sl6/fastjet/bin/fastjet-config
+5  Launch madgraph: ./bin/mg5_aMC
+       MG5_aMC>install MadAnalysis5
+7  Down load zlip to HEPTools directory: 
+       http://zlib.net/zlib-1.2.8.tar.gz
+8  Install zlib in a new directory HEPTools/zlib:
+       make
+       Make a subdirectory HEPTools/zlib/include and copy everything inside HEPTools/zlib there
+9   Download pythia8 to HEPTools directory:      
+       http://home.thep.lu.se/~torbjorn/pythia8/pythia8219.tgz
+10  Untar the file to HEPTools/pythia8
+11 Go to pythia8 directory and generate the Makefile.inc file:
+      ./configure --with-hepmc2=/share/sl6/HEPMC --with-lhapdf6-bin=/share/sl6/lhapdf6/bin/ --with-lhapdf6-include=/share/sl6/lhapdf6/include/ --with-lhapdf6-lib=/share/sl6/lhapdf6/lib  --with-promc=/share/sl6/promc --with-gzip=/users/bingxuan.liu/MG5_aMC_v2_5_1/HEPTools/zlib 
+12  Install: make
+13  cp -r examples/ ./share/Pythia8/
+14  Go back to madgraph directory and launch ./bin/mg5_aMC
+15  Change the path to pythia8 in  input/mg5_configuration.txt
+      HEPTools/pythia8/bin/pythia8-config
+16  install  mg5amc_py8_interface
+
+Now we can start generate events using madgraph, hadronize them using pythia8 and analyze them using madanalysis. 
+
+The official recipe works fine up to pythia:
+
+1  Download tar ball:
+      https://launchpad.net/mg5amcnlo
+2  Untar the tar ball
+3  Launch madgraph: ./bing/mg5_aMC
+4  Install pythia8 
