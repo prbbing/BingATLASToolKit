@@ -3,3 +3,40 @@ To test a new trigger:
 asetup AtlasHLT,21.0.X-VAL,rel_X,here
 
 athena -l DEBUG HLT_2j250_j150_config.py TriggerMenuXML/runHLT_forXMLgeneration.py >& logfile &
+
+
+Dump the text from AIM for a given tag for example r7725: 
+https://ami.in2p3.fr/AMI/servlet/net.hep.atlas.Database.Bookkeeping.AMI.Servlet.FrontEnd?Command=GetAMITagInfo+-amiTag%3D%22r7725%22&Converter=AMIXmlToText.xsl
+
+
+Produce evnt file:
+
+setupATLAS
+lsetup asetup
+asetup AtlasProduction,19.2.5.5,here
+
+Generate_tf.py --ecmEnergy=13000. --runNumber=578287 --firstEvent=1 --maxEvents=2 --randomSeed=123 --jobConfig=MC15.578287.MadGraphPythia8EvtGen_A14NNPDF23_y1bbbb.py --outputEVNTFile=user.biliu.test.pool.root
+
+After the generation:
+
+setupATLAS
+asetup 20.7.5.1, AtlasProduction,here
+
+Produce truth derivation from evnt file:
+
+Reco_tf.py --inputEVNTFile user.biliu.test.pool.root --outputDAODFile user.biliu.test.pool.root --reductionConf TRUTH1
+
+Sim, Digi, Reco:
+
+Sim_tf.py --outputHITSFile out.biliu.hits.root --inputEVNTFile user.biliu.test.pool.root --maxEvents 2 --randomSeed=321 --geometryVersion ATLAS-R2-2015-03-01-00 
+
+Digi_tf.py --inputHITSFile out.biliu.hits.root --outputRDOFile out.biliu.rdo.root --ignoreErrors True --maxEvents 2 --geometryVersion ATLAS-R2-2015-03-01-00 --digiSeedOffset1 1234 --conditionsTag OFLCOND-MC15c-SDR-09 --digiSeedOffset2 432
+
+Reco_tf.py --inputRDOFile out.biliu.rdo.root --outputAODFile user.biliu.test.reco.pool.root --geometryVersion ATLAS-R2-2015-03-01-00 --conditionsTag OFLCOND-MC15c-SDR-09 --ignoreErrors=True --autoConfiguration everything --preExec 'all:rec.Commissioning.set_Value_and_Lock(True);from AthenaCommon.BeamFlags import jobproperties;jobproperties.Beam.numberOfCollisions.set_Value_and_Lock(20.0);from LArROD.LArRODFlags import larRODFlags;larRODFlags.NumberOfCollisions.set_Value_and_Lock(20);larRODFlags.nSamples.set_Value_and_Lock(4);larRODFlags.doOFCPileupOptimization.set_Value_and_Lock(True);larRODFlags.firstSample.set_Value_and_Lock(0);larRODFlags.useHighestGainAutoCorr.set_Value_and_Lock(True);' 'RAWtoESD:from CaloRec.CaloCellFlags import jobproperties;jobproperties.CaloCellFlags.doLArCellEmMisCalib=False;' 'ESDtoAOD:TriggerFlags.AODEDMSet=\"AODSLIM\"'
+
+AOD: 
+
+setupATLAS
+asetup 20.7.7.4,AtlasDerivation,here
+
+Reco_tf.py --inputAODFile  user.biliu.test.reco.pool.root  --outputDAODFile user.biliu.test.exo.pool.root --reductionConf EXOT2 
