@@ -1,0 +1,4 @@
+import models/DMsimp_s_spin1
+generate p p > y1 b b~, y1 > b b~
+output 4b1000GeV
+launch
