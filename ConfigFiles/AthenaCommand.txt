@@ -1,0 +1,5 @@
+To test a new trigger:
+
+asetup AtlasHLT,21.0.X-VAL,rel_X,here
+
+athena -l DEBUG HLT_2j250_j150_config.py TriggerMenuXML/runHLT_forXMLgeneration.py >& logfile &
