@@ -16,34 +16,26 @@ bool FourJetsTopo::Initialize(const MA5::Configuration& cfg, const std::map<std:
   INFO << "        <>  Please cite arXiv.YYMM.NNNN               <>" << endmsg;
   INFO << "        <><><><><><><><><><><><><><><><><><><><><><><><>" << endmsg;
   // initialize variables, histo
+  //Define regions and their selections
   Manager()->AddRegionSelection("4j25");
-  Manager()->AddRegionSelection("4j25, 4bj");
+  Manager()->AddRegionSelection("4j25, 2j50");
   //Manager()->AddRegionSelection("4j25, >=1 bjet");
-  //Manager()->AddRegionSelection("4j25, >=2 bjet");
-  //Manager()->AddRegionSelection("4j25, >=3 bjet");
-  //Manager()->AddRegionSelection("4j25, >=4 bjet");
   // add cuts 
-  std::string SR4j25Cut[] = {"4j25", "4j25, 4bj"};
-  //std::string SR4j25Cut[] = {"4j25, >=0 bjet", "4j25, >=1 bjet", "4j25, >=2 bjet", "4j25, >=3 bjet", "4j25, >=4 bjet"};
+  std::string SR4j25Cut[] = {"4j25", "4j25, 2j50"};
   Manager()->AddCut("4 jets with pT > 25", SR4j25Cut);
-  //Manager()->AddCut(">=0 bjets with pT > 25",SR4j25Cut);
-  //Manager()->AddCut(">=1 bjets with pT > 25, eta < 2.5",SR4j25Cut);
-  //Manager()->AddCut(">=2 bjets with pT > 25, eta < 2.5",SR4j25Cut);
-  //Manager()->AddCut(">=3 bjets with pT > 25, eta < 2.5",SR4j25Cut);
-  //Manager()->AddCut(">=4 bjets with pT > 25, eta < 2.5",SR4j25Cut);
   // add histograms
   Manager()->AddHisto("Deta_12 in 4j25",100,0,10.0,"4j25"); 
   Manager()->AddHisto("Dphi_12 in 4j25",32,0,3.2,"4j25"); 
   Manager()->AddHisto("Angle_12 in 4j25",32,0,3.2,"4j25"); 
-  Manager()->AddHisto("Mass_12 in 4j25",150,0,1500,"4j25"); 
+  Manager()->AddHisto("Mass_12 in 4j25",750,0,7500,"4j25"); 
   Manager()->AddHisto("Deta_34 in 4j25",100,0,10.0,"4j25"); 
   Manager()->AddHisto("Dphi_34 in 4j25",32,0,3.2,"4j25"); 
   Manager()->AddHisto("Angle_34 in 4j25",32,0,3.2,"4j25"); 
   Manager()->AddHisto("Mass_34 in 4j25",150,0,1500,"4j25"); 
-  Manager()->AddHisto("Pt_1 in 4j25",100,0,1000,"4j25"); 
-  Manager()->AddHisto("Pt_2 in 4j25",100,0,1000,"4j25"); 
-  Manager()->AddHisto("Pt_3 in 4j25",100,0,1000,"4j25"); 
-  Manager()->AddHisto("Pt_4 in 4j25",100,0,1000,"4j25"); 
+  Manager()->AddHisto("Pt_1 in 4j25",500,0,5000,"4j25"); 
+  Manager()->AddHisto("Pt_2 in 4j25",500,0,5000,"4j25"); 
+  Manager()->AddHisto("Pt_3 in 4j25",500,0,5000,"4j25"); 
+  Manager()->AddHisto("Pt_4 in 4j25",500,0,5000,"4j25"); 
   Manager()->AddHisto("Eta_1 in 4j25",100,-5,5,"4j25"); 
   Manager()->AddHisto("Eta_2 in 4j25",100,-5,5,"4j25"); 
   Manager()->AddHisto("Eta_3 in 4j25",100,-5,5,"4j25"); 
@@ -52,29 +44,30 @@ bool FourJetsTopo::Initialize(const MA5::Configuration& cfg, const std::map<std:
   Manager()->AddHisto("Phi_2 in 4j25",64,-3.2,3.2,"4j25"); 
   Manager()->AddHisto("Phi_3 in 4j25",64,-3.2,3.2,"4j25"); 
   Manager()->AddHisto("Phi_4 in 4j25",64,-3.2,3.2,"4j25"); 
-  Manager()->AddHisto("pTRel in 4j25",100,0,1000,"4j25"); 
-  Manager()->AddCut("4bj", SR4j25Cut);
-  Manager()->AddHisto("Deta_12 in 4j25, 4bj",100,0,10.0,"4j25, 4bj"); 
-  Manager()->AddHisto("Dphi_12 in 4j25, 4bj",32,0,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Angle_12 in 4j25, 4bj",32,0,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Mass_12 in 4j25, 4bj",150,0,1500,"4j25, 4bj"); 
-  Manager()->AddHisto("Deta_34 in 4j25, 4bj",100,0,10.0,"4j25, 4bj"); 
-  Manager()->AddHisto("Dphi_34 in 4j25, 4bj",32,0,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Angle_34 in 4j25, 4bj",32,0,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Mass_34 in 4j25, 4bj",150,0,1500,"4j25, 4bj"); 
-  Manager()->AddHisto("Pt_1 in 4j25, 4bj",100,0,1000,"4j25, 4bj"); 
-  Manager()->AddHisto("Pt_2 in 4j25, 4bj",100,0,1000,"4j25, 4bj"); 
-  Manager()->AddHisto("Pt_3 in 4j25, 4bj",100,0,1000,"4j25, 4bj"); 
-  Manager()->AddHisto("Pt_4 in 4j25, 4bj",100,0,1000,"4j25, 4bj"); 
-  Manager()->AddHisto("Eta_1 in 4j25, 4bj",100,-5,5,"4j25, 4bj"); 
-  Manager()->AddHisto("Eta_2 in 4j25, 4bj",100,-5,5,"4j25, 4bj"); 
-  Manager()->AddHisto("Eta_3 in 4j25, 4bj",100,-5,5,"4j25, 4bj"); 
-  Manager()->AddHisto("Eta_4 in 4j25, 4bj",100,-5,5,"4j25, 4bj"); 
-  Manager()->AddHisto("Phi_1 in 4j25, 4bj",64,-3.2,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Phi_2 in 4j25, 4bj",64,-3.2,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Phi_3 in 4j25, 4bj",64,-3.2,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("Phi_4 in 4j25, 4bj",64,-3.2,3.2,"4j25, 4bj"); 
-  Manager()->AddHisto("pTRel in 4j25, 4bj",100,0,1000,"4j25, 4bj"); 
+  Manager()->AddHisto("pTRel in 4j25",1000,0,10000,"4j25"); 
+  // add cuts for the second region
+  Manager()->AddCut("Leading two jets > 50", SR4j25Cut);
+  Manager()->AddHisto("Deta_12 in 4j25, 2j50",100,0,10.0,"4j25, 2j50"); 
+  Manager()->AddHisto("Dphi_12 in 4j25, 2j50",32,0,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Angle_12 in 4j25, 2j50",32,0,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Mass_12 in 4j25, 2j50",750,0,7500,"4j25, 2j50"); 
+  Manager()->AddHisto("Deta_34 in 4j25, 2j50",100,0,10.0,"4j25, 2j50"); 
+  Manager()->AddHisto("Dphi_34 in 4j25, 2j50",32,0,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Angle_34 in 4j25, 2j50",32,0,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Mass_34 in 4j25, 2j50",150,0,1500,"4j25, 2j50"); 
+  Manager()->AddHisto("Pt_1 in 4j25, 2j50",500,0,5000,"4j25, 2j50"); 
+  Manager()->AddHisto("Pt_2 in 4j25, 2j50",500,0,5000,"4j25, 2j50"); 
+  Manager()->AddHisto("Pt_3 in 4j25, 2j50",500,0,5000,"4j25, 2j50"); 
+  Manager()->AddHisto("Pt_4 in 4j25, 2j50",500,0,5000,"4j25, 2j50"); 
+  Manager()->AddHisto("Eta_1 in 4j25, 2j50",100,-5,5,"4j25, 2j50"); 
+  Manager()->AddHisto("Eta_2 in 4j25, 2j50",100,-5,5,"4j25, 2j50"); 
+  Manager()->AddHisto("Eta_3 in 4j25, 2j50",100,-5,5,"4j25, 2j50"); 
+  Manager()->AddHisto("Eta_4 in 4j25, 2j50",100,-5,5,"4j25, 2j50"); 
+  Manager()->AddHisto("Phi_1 in 4j25, 2j50",64,-3.2,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Phi_2 in 4j25, 2j50",64,-3.2,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Phi_3 in 4j25, 2j50",64,-3.2,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("Phi_4 in 4j25, 2j50",64,-3.2,3.2,"4j25, 2j50"); 
+  Manager()->AddHisto("pTRel in 4j25, 2j50",1000,0,10000,"4j25, 2j50"); 
   return true;
 }
 
@@ -93,7 +86,8 @@ void FourJetsTopo::Finalize(const SampleFormat& summary, const std::vector<Sampl
 // -----------------------------------------------------------------------------
 bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
 {
-  if (event.rec()!=0 && event.mc()!=0)
+  //If the input is a reco root file such as delphes 
+  if (event.rec()!=0)
   {
     double myEventWeight;
     if(Configuration().IsNoEventWeight()) myEventWeight=1.;
@@ -104,6 +98,7 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
       return false;
     }
     Manager()->InitializeForNewEvent(myEventWeight);
+    //Fill object vectors
     std::vector<const RecJetFormat*> Jets, BJets, BFlavorJets;
     if (event.rec()->jets().size() < 4) return true;
     for (unsigned int i = 0; i < 4; i++) {
@@ -113,6 +108,7 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
         if (jet.btag()) BJets.push_back(&jet);
       }
     }
+    //Select events with more than 4 jets
     if (Jets.size() < 4) return true;
     std::vector<const MCParticleFormat*> BHadrons;
     for(unsigned int i=0; i<event.mc()->particles().size(); i++) {
@@ -121,6 +117,7 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
         if (fabs(prt->statuscode()) != 91) BHadrons.push_back(prt);
       }
     }
+    //Sort the objects by pT
     SORTER->sort(Jets, PTordering);
     SORTER->sort(BJets, PTordering);
     double pt_1 = Jets[0]->momentum().Pt();
@@ -144,17 +141,11 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
     double deta_12 = fabs(Jets[0]->momentum().Eta() - Jets[1]->momentum().Eta());
     double deta_34 = fabs(Jets[2]->momentum().Eta() - Jets[3]->momentum().Eta());
     double angle_12 = Jets[0]->momentum().Angle(Jets[1]->momentum());
+    double dr_12 = Jets[0]->momentum().DeltaR(Jets[1]->momentum());
     double angle_34 = Jets[2]->momentum().Angle(Jets[3]->momentum());
-    double Angle = fabs((Jets[0]->momentum() + Jets[1]->momentum()).Phi() - (Jets[2]->momentum() + Jets[3]->momentum()).Phi()); 
-    if (Angle > M_PI) Angle = 2*M_PI - Angle;
-    double pTRel = (Jets[0]->momentum() + Jets[1]->momentum()).Pt()*tan(Angle/2);
-    //int nbj = BJets.size();
+    double pTRel = (Jets[0]->momentum() + Jets[1]->momentum()).P()*tan(angle_12/2);
+    //Apply the cuts to a given region
     Manager()->ApplyCut(Jets.size()>=4,"4 jets with pT > 25");
-    //Manager()->ApplyCut(nbj>=0,">=0 bjets with pT > 25");
-    //Manager()->ApplyCut(nbj>=1,">=1 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=2,">=2 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=3,">=3 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=4,">=4 bjets with pT > 25, eta < 2.5");
     Manager()->FillHisto("Deta_12 in 4j25",deta_12);
     Manager()->FillHisto("Dphi_12 in 4j25",dphi_12);
     Manager()->FillHisto("Angle_12 in 4j25",angle_12);
@@ -176,29 +167,34 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
     Manager()->FillHisto("Phi_3 in 4j25",phi_3);
     Manager()->FillHisto("Phi_4 in 4j25",phi_4);
     Manager()->FillHisto("pTRel in 4j25",pTRel);
-    Manager()->ApplyCut(BHadrons.size()>=4,"4bj");
-    Manager()->FillHisto("Deta_12 in 4j25, 4bj",deta_12);
-    Manager()->FillHisto("Dphi_12 in 4j25, 4bj",dphi_12);
-    Manager()->FillHisto("Angle_12 in 4j25, 4bj",angle_12);
-    Manager()->FillHisto("Mass_12 in 4j25, 4bj",mass_12);
-    Manager()->FillHisto("Deta_34 in 4j25, 4bj",deta_34);
-    Manager()->FillHisto("Dphi_34 in 4j25, 4bj",dphi_34);
-    Manager()->FillHisto("Angle_34 in 4j25, 4bj",angle_34);
-    Manager()->FillHisto("Mass_34 in 4j25, 4bj",mass_34);
-    Manager()->FillHisto("Pt_1 in 4j25, 4bj",pt_1);
-    Manager()->FillHisto("Pt_2 in 4j25, 4bj",pt_2);
-    Manager()->FillHisto("Pt_3 in 4j25, 4bj",pt_3);
-    Manager()->FillHisto("Pt_4 in 4j25, 4bj",pt_4);
-    Manager()->FillHisto("Eta_1 in 4j25, 4bj",eta_1);
-    Manager()->FillHisto("Eta_2 in 4j25, 4bj",eta_2);
-    Manager()->FillHisto("Eta_3 in 4j25, 4bj",eta_3);
-    Manager()->FillHisto("Eta_4 in 4j25, 4bj",eta_4);
-    Manager()->FillHisto("Phi_1 in 4j25, 4bj",phi_1);
-    Manager()->FillHisto("Phi_2 in 4j25, 4bj",phi_2);
-    Manager()->FillHisto("Phi_3 in 4j25, 4bj",phi_3);
-    Manager()->FillHisto("Phi_4 in 4j25, 4bj",phi_4);
-    Manager()->FillHisto("pTRel in 4j25, 4bj",pTRel);
+    //Apply cuts to another region
+    Manager()->ApplyCut(Jets[0]->pt() > 50 && Jets[1]->pt() > 50,"Leading two jets > 50");
+    //A quick way to make two D histograms: print out the variables to a log file
+    if (Jets[0]->pt() > 50 && Jets[1]->pt() > 50)
+      INFO << std::to_string(angle_12) << ":" << std::to_string((Jets[0]->momentum() + Jets[1]->momentum()).P())<<endmsg;
+    Manager()->FillHisto("Deta_12 in 4j25, 2j50",deta_12);
+    Manager()->FillHisto("Dphi_12 in 4j25, 2j50",dphi_12);
+    Manager()->FillHisto("Angle_12 in 4j25, 2j50",angle_12);
+    Manager()->FillHisto("Mass_12 in 4j25, 2j50",mass_12);
+    Manager()->FillHisto("Deta_34 in 4j25, 2j50",deta_34);
+    Manager()->FillHisto("Dphi_34 in 4j25, 2j50",dphi_34);
+    Manager()->FillHisto("Angle_34 in 4j25, 2j50",angle_34);
+    Manager()->FillHisto("Mass_34 in 4j25, 2j50",mass_34);
+    Manager()->FillHisto("Pt_1 in 4j25, 2j50",pt_1);
+    Manager()->FillHisto("Pt_2 in 4j25, 2j50",pt_2);
+    Manager()->FillHisto("Pt_3 in 4j25, 2j50",pt_3);
+    Manager()->FillHisto("Pt_4 in 4j25, 2j50",pt_4);
+    Manager()->FillHisto("Eta_1 in 4j25, 2j50",eta_1);
+    Manager()->FillHisto("Eta_2 in 4j25, 2j50",eta_2);
+    Manager()->FillHisto("Eta_3 in 4j25, 2j50",eta_3);
+    Manager()->FillHisto("Eta_4 in 4j25, 2j50",eta_4);
+    Manager()->FillHisto("Phi_1 in 4j25, 2j50",phi_1);
+    Manager()->FillHisto("Phi_2 in 4j25, 2j50",phi_2);
+    Manager()->FillHisto("Phi_3 in 4j25, 2j50",phi_3);
+    Manager()->FillHisto("Phi_4 in 4j25, 2j50",phi_4);
+    Manager()->FillHisto("pTRel in 4j25, 2j50",pTRel);
   }
+  //If the input is a lhe file 
   if (event.mc()!=0)
   {
     double myEventWeight;
@@ -219,30 +215,6 @@ bool FourJetsTopo::Execute(SampleFormat& sample, const EventFormat& event)
       }
     }
     SORTER->sort(BHadrons, PTordering);
-    //if (BHadrons.size() >= 2)
-    //  Beta = fabs(BHadrons[0]->momentum().Phi() - (BHadrons[0]->momentum() + BHadrons[1]->momentum()).Phi());
-    //if (Beta > M_PI) Beta = 2*M_PI - Beta;
-    //double Dphi = -999;
-    //if (BHadrons.size() >= 2)
-    //  Dphi = fabs(BHadrons[0]->momentum().Phi() - BHadrons[1]->momentum().Phi());
-    //if (Dphi > M_PI) Dphi = 2*M_PI - Dphi;
-    //double Angle = -999;
-    //if (BHadrons.size() >= 4)
-    //  Angle = (BHadrons[0]->momentum() + BHadrons[1]->momentum()).Angle(BHadrons[2]->momentum() + BHadrons[3]->momentum()); 
-    //int nbj = 4;
-    //Manager()->ApplyCut(nbj>=4,"4 jets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=0,">=0 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=1,">=1 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=2,">=2 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=3,">=3 bjets with pT > 25, eta < 2.5");
-    //Manager()->ApplyCut(nbj>=4,">=4 bjets with pT > 25, eta < 2.5");
-    //Manager()->FillHisto("Beta in 4j25, >=0 bjet", Beta);
-    //Manager()->FillHisto("Angle in 4j25, >=0 bjet", Angle);
-    //Manager()->FillHisto("Dphi in 4j25, >=0 bjet", Dphi);
-    //Manager()->FillHisto("Beta in 4j25, >=1 bjet", Beta);
-    //Manager()->FillHisto("Beta in 4j25, >=2 bjet", Beta);
-    //Manager()->FillHisto("Beta in 4j25, >=3 bjet", Beta);
-    //Manager()->FillHisto("Beta in 4j25, >=4 bjet", Beta);
   }
   return true;
 }
