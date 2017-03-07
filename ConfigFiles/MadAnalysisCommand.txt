@@ -1,0 +1,20 @@
+1 Install Delphes
+
+in the madanalysis directory:
+./bin/ma5 -R
+install Delphis
+
+2 Restart madanalysis
+
+3 
+set main.fastsim.package=delphes
+set main.fastsim.detector=atlas
+import /path/to/the/hepmcfile
+(example:
+import /users/bingxuan.liu/MG5_aMC_v2_5_2/4b_1000GeV_Feb21st/Events/run_01/tag_1_pythia8_events.hepmc.gz)
+submit
+
+The output root file is located at: ANALYSIS_0/Output/_defaultset
+
+This is the reco level input for the madanalysis job
+
