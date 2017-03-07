@@ -5,7 +5,7 @@ import sys
 import os
 import re
 
-regions = ["4j25","4j25, 3rdbtag"]
+regions = ["4j25","4j25, 2j50"]
 
 histTxt = open("histos.saf","r")
 out = TFile("hist_all.root","RECREATE")
