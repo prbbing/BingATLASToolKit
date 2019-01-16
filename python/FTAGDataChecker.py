@@ -27,7 +27,7 @@ for period in runDic:
   size = os.popen(command).readlines()[0].split(":")[1].strip(" ")
   if "TB" in size:
     sizeInGBPeriod = round(float(size.split(" ")[0])*1000,3)
-  else if "MB" in size:
+  elif "MB" in size:
     sizeInGBPeriod = round(float(size.split(" ")[0])/1000,3)
   else:
     sizeInGBPeriod = float(size.split(" ")[0])
