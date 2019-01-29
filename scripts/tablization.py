@@ -1,4 +1,4 @@
-import os,sys,re
+import os,sys,re,math
 
 def writeALine(name, values):
   text = name.replace("_","\_")
@@ -6,6 +6,12 @@ def writeALine(name, values):
     text = text + " & " + value
   text = text + "\\\\"
   return text
+
+def quadro(values):
+  error = 0
+  for value in values:
+    error = error + math.pow(float(value),2)
+  return str(round(math.sqrt(error),3))
 
 sysDic = {
  "Detector and Calibration Uncertainties" : [
@@ -142,7 +148,60 @@ for table in lineDic:
   textToWrite = writeALine("TotalSystematicErr", sysMap["TotalSystematicErr"])
   os.system("echo '" + textToWrite + " ' >> " + table + ".tex") 
   os.system("echo '\hline' >> " +  table + ".tex")  
-  os.system("echo '\hline' >> " +  table + ".tex")  
   os.system("echo '\end{tabular}' >> " +  table + ".tex")  
   os.system("echo '}' >> " +  table + ".tex")  
-  
+ 
+  os.system("touch " + table + "_Condensed.tex")
+  os.system("echo '\scalebox{0.7}{' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\\renewcommand{\\arraystretch}{1.2}' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\\begin{tabular}{|l|ccccccccc|}' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\hline' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\multirow{2}*{Systematic Uncertainty Source} & \multicolumn{9}{c|}{Systematic Uncertainty in $\ptjet\lbrack\,GeV\\rbrack$ Bins}\\' >> " +  table + "_Condensed.tex")  
+  os.system("echo '      & $\lbrack20,30\\rbrack$ & $\lbrack30,40\\rbrack$ & $\lbrack40,50\\rbrack$ & $\lbrack50,70\\rbrack$ & $\lbrack70,90\\rbrack$ & $\lbrack90,110\\rbrack$ & $\lbrack110,140\\rbrack$ & $\lbrack140,170\\rbrack$ & $\lbrack170,200\\rbrack$ \\\\' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\hline' >> " +  table + "_Condensed.tex")
+  currentValues = []
+  finalValues = []
+  for number in range(0,8):
+    for systematic in sysMap:
+      if systematic in sysDic["Detector and Calibration Uncertainties"]:
+        currentValues.append(sysMap[systematic][number])
+    finalValues.append(quadro(currentValues))
+  textToWrite = writeALine("Detector and Calibration Uncertainties", finalValues)   
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  currentValues = []
+  finalValues = []
+  for number in range(0,8):
+    for systematic in sysMap:
+      if systematic in sysDic["Modeling Uncertainties"]:
+        currentValues.append(sysMap[systematic][number])
+    finalValues.append(quadro(currentValues))
+  textToWrite = writeALine("Modeling Uncertainties", finalValues)   
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  currentValues = []
+  finalValues = []
+  for number in range(0,8):
+    for systematic in sysMap:
+      if systematic in sysDic["MC Statistical Uncertainties"]:
+        currentValues.append(sysMap[systematic][number])
+    finalValues.append(quadro(currentValues))
+  textToWrite = writeALine("MC Statistical Uncertainties", finalValues)   
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  currentValues = []
+  finalValues = []
+  for number in range(0,8):
+    for systematic in sysMap:
+      if systematic in sysDic["Template Selection Uncertainties"]:
+        currentValues.append(sysMap[systematic][number])
+    finalValues.append(quadro(currentValues))
+  textToWrite = writeALine("Template Selection Uncertainties", finalValues)   
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  os.system("echo '\hline' >> " +  table + "_Condensed.tex")  
+  textToWrite = writeALine("DataStats", sysMap["DataStats"])
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  textToWrite = writeALine("TotalSystematicErr", sysMap["TotalSystematicErr"])
+  os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
+  os.system("echo '\hline' >> " +  table + "_Condensed.tex")  
+  os.system("echo '\end{tabular}' >> " +  table + "_Condensed.tex")  
+  os.system("echo '}' >> " +  table + "_Condensed.tex")  
+     
+ 
