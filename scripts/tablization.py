@@ -166,6 +166,7 @@ for table in lineDic:
       if systematic in sysDic["Detector and Calibration Uncertainties"]:
         currentValues.append(sysMap[systematic][number])
     finalValues.append(quadro(currentValues))
+    currentValues = []
   textToWrite = writeALine("Detector and Calibration Uncertainties", finalValues)   
   os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
   currentValues = []
@@ -175,6 +176,7 @@ for table in lineDic:
       if systematic in sysDic["Modeling Uncertainties"]:
         currentValues.append(sysMap[systematic][number])
     finalValues.append(quadro(currentValues))
+    currentValues = []
   textToWrite = writeALine("Modeling Uncertainties", finalValues)   
   os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
   currentValues = []
@@ -184,6 +186,7 @@ for table in lineDic:
       if systematic in sysDic["MC Statistical Uncertainties"]:
         currentValues.append(sysMap[systematic][number])
     finalValues.append(quadro(currentValues))
+    currentValues = []
   textToWrite = writeALine("MC Statistical Uncertainties", finalValues)   
   os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
   currentValues = []
@@ -193,6 +196,7 @@ for table in lineDic:
       if systematic in sysDic["Template Selection Uncertainties"]:
         currentValues.append(sysMap[systematic][number])
     finalValues.append(quadro(currentValues))
+    currentValues = []
   textToWrite = writeALine("Template Selection Uncertainties", finalValues)   
   os.system("echo '" + textToWrite + " ' >> " + table + "_Condensed.tex") 
   os.system("echo '\hline' >> " +  table + "_Condensed.tex")  
