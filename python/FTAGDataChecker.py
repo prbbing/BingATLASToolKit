@@ -5,6 +5,7 @@ import re
 parser = optparse.OptionParser()
 parser.add_option('--check2017',dest='check2017', help='Check 2017 data.',action="store_true", default=False)
 parser.add_option('--check2018',dest='check2018', help='Check 2018 data.', action="store_true", default=False)
+parser.add_option('--check2016',dest='check2016', help='Check 2016 data.', action="store_true", default=False)
 parser.add_option('--containerString',dest='containerString', help='Container string to use.', default="")
 parser.add_option('--runString',dest='runString', help='Run string to use.', default="")
 (arguments, args) = parser.parse_args()
@@ -41,6 +42,21 @@ if arguments.check2018:
     "M" : [359191, 360414],
     "N" : [361635, 361696],
     "O" : [361738, 363400],
+ }
+
+if arguments.check2016:
+ sys.stderr.write("Checking year 2016: \n")
+ runDic = {
+    "A" : [296939, 300287],
+    "B" : [300345, 300908],
+    "C" : [301912, 302393],
+    "D" : [302737, 303560],
+    "E" : [303638, 303892],
+    "F" : [303943, 304494],
+    "G" : [305291, 306714],
+    "I" : [307124, 308084],
+    "K" : [309311, 309759],
+    "L" : [310015, 311481],
  }
 
 sys.stderr.write("Checking containers: " + str(arguments.containerString) + "\n")
